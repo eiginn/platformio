@@ -251,7 +251,7 @@ if "variant" in BOARD_BUILDOPTS:
 
 envsafe = env.Clone()
 
-if "zero" in env.subst("$BOARD"):
+if any(x in env.subst("$BOARD") for x in ["zero", "featherM0"]):
     envsafe.Append(
         CFLAGS=[
             "-std=gnu11"

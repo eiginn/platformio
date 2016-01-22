@@ -28,7 +28,7 @@ def BeforeUpload(target, source, env):  # pylint: disable=W0613,W0621
     env.AutodetectUploadPort()
 
     board_type = env.subst("$BOARD")
-    if "zero" not in board_type:
+    if not any(x in board_type for x in ["zero", "featherM0"]):
         env.Append(
             UPLOADERFLAGS=[
                 "-U",
@@ -58,7 +58,7 @@ env = DefaultEnvironment()
 
 SConscript(env.subst(join("$PIOBUILDER_DIR", "scripts", "basearm.py")))
 
-if env.subst("$BOARD") == "zero":
+if any(x in env.subst("$BOARD") for x in ["zero", "featherM0"]):
     env.Replace(
         UPLOADER=join("$PIOPACKAGES_DIR", "tool-openocd", "bin", "openocd"),
         UPLOADERFLAGS=[
@@ -118,7 +118,7 @@ if "due" in env.subst("$BOARD"):
         ]
 
     )
-elif "zero" in env.subst("$BOARD"):
+elif any(x in env.subst("$BOARD") for x in ["zero", "featherM0"]):
     env.Append(
         CPPFLAGS=[
             "--param", "max-inline-insns-single=500"
@@ -160,7 +160,7 @@ AlwaysBuild(target_size)
 # Target: Upload by default .bin file
 #
 
-if env.subst("$BOARD") == "zero":
+if any(x in env.subst("$BOARD") for x in ["zero", "featherM0"]):
     upload = env.Alias(["upload", "uploadlazy"], target_firm, "$UPLOADCMD")
 else:
     upload = env.Alias(["upload", "uploadlazy"], target_firm,
