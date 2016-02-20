@@ -4,22 +4,76 @@ Release Notes
 PlatformIO 2.0
 --------------
 
-2.7.2 (2016-01-??)
+2.8.4 (2016-02-17)
 ~~~~~~~~~~~~~~~~~~
 
+* Added support for the new ESP8266-based boards (ESPDuino, ESP-WROOM-02,
+  ESPresso Lite 1.0 & 2.0, SparkFun ESP8266 Thing Dev, ThaiEasyElec ESPino) to
+  `Espressif <http://docs.platformio.org/en/latest/platforms/espressif.html>`__
+  development platform
+* Added ``board_f_flash`` option to `Project Configuration File platformio.ini <http://docs.platformio.org/en/latest/projectconf.html>`__
+  which allows to specify `custom flash chip frequency <http://docs.platformio.org/en/latest/platforms/espressif.html#custom-flash-frequency>`_
+  for Espressif development platform
+  (`issue #501 <https://github.com/platformio/platformio/issues/501>`_)
+* Added ``board_flash_mode`` option to `Project Configuration File platformio.ini <http://docs.platformio.org/en/latest/projectconf.html>`__
+  which allows to specify `custom flash chip mode <http://docs.platformio.org/en/latest/platforms/espressif.html#custom-flash-mode>`_
+  for Espressif development platform
+* Handle new environment variables
+  `PLATFORMIO_UPLOAD_PORT <http://docs.platformio.org/en/latest/envvars.html#platformio-upload-port>`_
+  and `PLATFORMIO_UPLOAD_FLAGS <http://docs.platformio.org/en/latest/envvars.html#platformio-upload-flags>`_
+  (`issue #518 <https://github.com/platformio/platformio/issues/518>`_)
+* Fixed issue with ``CPPDEFINES`` which contain space and break PlatformIO
+  IDE Linter
+  (`IDE issue #34 <https://github.com/platformio/platformio-atom-ide/issues/34>`_)
+* Fixed unable to link C++ standard library to Espressif platform build
+  (`issue #503 <https://github.com/platformio/platformio/issues/503>`_)
+* Fixed issue with pointer (``char* myfunc()``) while converting from ``*.ino``
+  to ``*.cpp``
+  (`issue #506 <https://github.com/platformio/platformio/issues/506>`_)
+
+2.8.3 (2016-02-02)
+~~~~~~~~~~~~~~~~~~
+
+* Better integration of PlatformIO Builder with PlatformIO IDE Linter
+* Fixed issue with removing temporary file while converting ``*.ino`` to
+  ``*.cpp``
+* Fixed missing dependency (mbed framework) for Atmel SAM development platform
+  (`issue #487 <https://github.com/platformio/platformio/issues/487>`_)
+
+2.8.2 (2016-01-29)
+~~~~~~~~~~~~~~~~~~
+
+* Corrected RAM size for NXP LPC1768 based boards
+  (`issue #484 <https://github.com/platformio/platformio/issues/484>`_)
+* Exclude only ``test`` and ``tests`` folders from build process
+* Reverted ``-Wl,-whole-archive`` hook for ST STM32 and mbed
+
+2.8.1 (2016-01-29)
+~~~~~~~~~~~~~~~~~~
+
+* Fixed a bug with Project Initialization in PlatformIO IDE
+
+2.8.0 (2016-01-29)
+~~~~~~~~~~~~~~~~~~
+
+* `PlatformIO IDE <http://docs.platformio.org/en/latest/ide/atom.html>`_ for
+  Atom
+  (`issue #470 <https://github.com/platformio/platformio/issues/470>`_)
 * Added ``pio`` command line alias for ``platformio`` command
   (`issue #447 <https://github.com/platformio/platformio/issues/447>`_)
 * Added SPL-Framework support for Nucleo F401RE board
   (`issue #453 <https://github.com/platformio/platformio/issues/453>`_)
 * Added ``upload_resetmethod`` option to `Project Configuration File platformio.ini <http://docs.platformio.org/en/latest/projectconf.html>`__
-  and allowed to `change default upload reset method <http://docs.platformio.org/en/latest/platforms/espressif.html#custom-reset-method>`_
+  which allows to specify `custom upload reset method <http://docs.platformio.org/en/latest/platforms/espressif.html#custom-reset-method>`_
   for Espressif development platform
   (`issue #444 <https://github.com/platformio/platformio/issues/444>`_)
-* Allowed to force output of color ANSI-codes even if the output is a ``pipe``
-  (not a ``tty``)
+* Allowed to force output of color ANSI-codes or to disable progress bar even
+  if the output is a ``pipe`` (not a ``tty``) using `Environment variables <http://docs.platformio.org/en/latest/envvars.html>`__
   (`issue #465 <https://github.com/platformio/platformio/issues/465>`_)
 * Set 1Mb SPIFFS for Espressif boards by default
   (`issue #458 <https://github.com/platformio/platformio/issues/458>`_)
+* Exclude ``test*`` folder by default from build process
+* Generate project for IDEs with information about installed libraries
 * Fixed builder for mbed framework and ST STM32 platform
 
 

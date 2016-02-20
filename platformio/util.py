@@ -272,8 +272,18 @@ def get_serialports():
         from serial.tools.list_ports import comports
     except ImportError:
         raise exception.GetSerialPortsError(os.name)
-    result = [{"port": p, "description": d, "hwid": h}
-              for p, d, h in comports() if p]
+
+    result = []
+    for p, d, h in comports():
+        if not p:
+            continue
+        if "windows" in get_systype():
+            try:
+                d = unicode(d, errors="ignore")
+            except TypeError:
+                pass
+        result.append({"port": p, "description": d, "hwid": h})
+
     # fix for PySerial
     if not result and system() == "Darwin":
         for p in glob("/dev/tty.*"):
@@ -332,7 +342,8 @@ def get_api_result(path, params=None, data=None):
             raise exception.APIRequestError(e)
     except requests.exceptions.ConnectionError:
         raise exception.APIRequestError(
-            "Could not connect to PlatformIO Registry Service")
+            "Could not connect to PlatformIO Registry Service. "
+            "Please try later.")
     except ValueError:
         raise exception.APIRequestError(
             "Invalid response: %s" % r.text.encode("utf-8"))

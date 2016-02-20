@@ -1,9 +1,8 @@
 {% extends "!footer.html" %}
 
 {% block extrafooter %}
-<link rel="stylesheet" href="{{ pathto('_static/extra.css', 2) }}" type="text/css" />
+<link rel="stylesheet" href="{{ pathto('_static/extra.css', 1) }}" type="text/css" />
 <header id="pionav" class="navbar navbar-inverse navbar-fixed-top">
-    <a href="http://iotawards.postscapes.com/2015-16/best-iot-software-and-tools#vote" target="_blank" class="top-banner"> PlatformIO is nominated for the year's best Software and Tools in the 2015/16 IoT Awards <i class="fa fa-trophy fa-2x"></i> Please vote for us!</a>
   <div class="container container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="http://platformio.org/"></i> PlatformIO</a>
@@ -13,15 +12,15 @@
       <div>
         <ul class="nav navbar-nav">
           <li><a href="http://platformio.org/#!/get-started"><i class="fa fa-rocket fa-lg"></i>Get Started</a></li>
-          <li><a href="http://platformio.org/#!/platforms"><i class="fa fa-laptop fa-lg"></i>Platforms</a></li>
-          <li><a href="http://platformio.org/#!/frameworks"><i class="fa fa-cogs fa-lg"></i>Frameworks</a></li>
-          <li><a href="http://platformio.org/#!/boards"><i class="fa fa-gamepad fa-lg"></i>Boards</a></li>
+          <li><a href="http://platformio.org/#!/platformio-ide"><i class="fa fa-cube fa-lg"></i>IDE</a></li>
+          <li><a href="http://platformio.org/#!/platforms"><i class="fa fa-wrench fa-lg"></i>Development</a></li>
           <li ><a href="http://platformio.org/#!/lib"><i class="fa fa-code fa-lg"></i>Libraries</a></li>
+          <li class="active"><a href="http://docs.platformio.org/"><i class="fa fa-book fa-lg"></i>Docs</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="http://platformio.org/#!/who-uses"><i class="fa fa-heart-o fa-lg"></i>Who uses</a></li>
-          <li class="active"><a href="http://docs.platformio.org/"><i class="fa fa-book fa-lg"></i>Docs</a></li>
+          <li><a href="http://platformio.org/#!/donate"><i class="fa fa-heart-o fa-lg"></i>Donate</a></li>
+          <li><a href="http://platformio.org/#!/contact"><i class="fa fa-envelope fa-lg"></i>Contact</a></li>
         </ul>
       </div>
 
@@ -36,7 +35,7 @@
             return;
         }
         function fixScroll() {
-            $(window).scrollTop($(window).scrollTop() - 100);
+            $(window).scrollTop($(window).scrollTop() - 50);
         }
         window.setTimeout(fixScroll, 50);
         $(window).on('hashchange', function(e){fixScroll();});

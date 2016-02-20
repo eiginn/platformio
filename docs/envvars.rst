@@ -34,15 +34,20 @@ operations/commands.
 PlatformIO handles ``CI`` variable which is setup by
 `Continuous Integration <http://en.wikipedia.org/wiki/Continuous_integration>`_
 (Travis, Circle and etc.) systems.
-Currently, PlatformIO uses it to disable prompts.
-
-In other words, ``CI=true`` automatically setup
-:envvar:`PLATFORMIO_SETTING_ENABLE_PROMPTS=false <PLATFORMIO_SETTING_ENABLE_PROMPTS>`.
+PlatformIO uses it to disable prompts and progress bars. In other words,
+``CI=true`` automatically setup :envvar:`PLATFORMIO_SETTING_ENABLE_PROMPTS` to
+``false`` and :envvar:`PLATFORMIO_DISABLE_PROGRESSBAR` to ``true``.
 
 .. envvar:: PLATFORMIO_FORCE_COLOR
 
 Force to output color ANSI-codes even if the output is a ``pipe`` (not a ``tty``).
 The possible values are ``true`` and ``false``. Default is ``PLATFORMIO_FORCE_COLOR=false``.
+
+.. envvar:: PLATFORMIO_DISABLE_PROGRESSBAR
+
+Disable progress bar for package/library downloader and uploader. This is
+useful when calling PlatformIO from subprocess and output is a ``pipe`` (not a ``tty``).
+The possible values are ``true`` and ``false``. Default is ``PLATFORMIO_DISABLE_PROGRESSBAR=false``.
 
 .. envvar:: PLATFORMIO_HOME_DIR
 
@@ -65,8 +70,8 @@ Allows to override :ref:`projectconf` option :ref:`projectconf_pio_envs_dir`.
 Allows to override :ref:`projectconf` option :ref:`projectconf_pio_data_dir`.
 
 
-Builder
--------
+Building
+--------
 
 .. envvar:: PLATFORMIO_BUILD_FLAGS
 
@@ -83,6 +88,18 @@ Allows to set :ref:`projectconf` option :ref:`projectconf_src_filter`.
 .. envvar:: PLATFORMIO_EXTRA_SCRIPT
 
 Allows to set :ref:`projectconf` option :ref:`projectconf_extra_script`.
+
+
+Uploading
+---------
+
+.. envvar:: PLATFORMIO_UPLOAD_PORT
+
+Allows to set :ref:`projectconf` option :ref:`projectconf_upload_port`.
+
+.. envvar:: PLATFORMIO_UPLOAD_FLAGS
+
+Allows to set :ref:`projectconf` option :ref:`projectconf_upload_flags`.
 
 
 Settings

@@ -32,7 +32,7 @@ import re
 import sys
 import xml.etree.ElementTree as ElementTree
 from binascii import crc32
-from os import getenv, walk
+from os import walk
 from os.path import basename, isfile, join, normpath
 
 from SCons.Script import DefaultEnvironment
@@ -195,6 +195,20 @@ def get_build_flags(data):
     return flags
 
 
+def _mbed_whole_archive_hook(flags):
+    if (not isinstance(flags, list) or
+            env.get("BOARD_OPTIONS", {}).get("platform") != "ststm32"):
+        return flags
+
+    for pos, flag in enumerate(flags[:]):
+        if isinstance(flag, basestring):
+            continue
+        flags.insert(pos, "-Wl,-whole-archive")
+        flags.insert(pos + 2, "-Wl,-no-whole-archive")
+
+    return flags
+
+
 board_type = env.subst("$BOARD")
 variant = MBED_VARIANTS[
     board_type] if board_type in MBED_VARIANTS else board_type.upper()
@@ -205,6 +219,8 @@ build_flags = get_build_flags(eixdata)
 variant_dir = join("$PLATFORMFW_DIR", "variant", variant)
 
 env.Replace(
+    _mbed_whole_archive_hook=_mbed_whole_archive_hook,
+    _LIBFLAGS="${_mbed_whole_archive_hook(%s)}" % env.get("_LIBFLAGS")[2:-1],
     CPPFLAGS=build_flags.get("CPPFLAGS", []),
     CFLAGS=build_flags.get("CFLAGS", []),
     CXXFLAGS=build_flags.get("CXXFLAGS", []),
@@ -217,8 +233,7 @@ env.Replace(
 # restore external build flags
 env.ProcessFlags([
     env.get("BOARD_OPTIONS", {}).get("build", {}).get("extra_flags"),
-    env.get("BUILD_FLAGS"),
-    getenv("PLATFORMIO_BUILD_FLAGS"),
+    env.get("BUILD_FLAGS")
 ])
 
 # Hook for K64F and K22F

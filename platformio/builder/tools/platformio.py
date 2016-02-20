@@ -16,7 +16,7 @@ from __future__ import absolute_import
 
 import re
 from glob import glob
-from os import getenv, listdir, sep, walk
+from os import listdir, sep, walk
 from os.path import basename, dirname, isdir, isfile, join, normpath, realpath
 
 from SCons.Script import COMMAND_LINE_TARGETS, DefaultEnvironment, SConscript
@@ -27,7 +27,9 @@ from platformio.util import pioversion_to_intstr
 SRC_BUILD_EXT = ["c", "cpp", "S", "spp", "SPP", "sx", "s", "asm", "ASM"]
 SRC_HEADER_EXT = ["h", "hpp"]
 SRC_DEFAULT_FILTER = " ".join([
-    "+<*>", "-<.git%s>" % sep, "-<svn%s>" % sep, "-<example*%s>" % sep
+    "+<*>", "-<.git%s>" % sep, "-<svn%s>" % sep,
+    "-<example%s>" % sep, "-<examples%s>" % sep,
+    "-<test%s>" % sep, "-<tests%s>" % sep
 ])
 
 
@@ -42,8 +44,7 @@ def BuildProgram(env):
 
     env.ProcessFlags([
         env.get("BOARD_OPTIONS", {}).get("build", {}).get("extra_flags"),
-        env.get("BUILD_FLAGS"),
-        getenv("PLATFORMIO_BUILD_FLAGS"),
+        env.get("BUILD_FLAGS")
     ])
 
     if env.get("FRAMEWORK"):
@@ -70,10 +71,7 @@ def BuildProgram(env):
         )
 
     # Handle SRC_BUILD_FLAGS
-    env.ProcessFlags([
-        env.get("SRC_BUILD_FLAGS", None),
-        getenv("PLATFORMIO_SRC_BUILD_FLAGS"),
-    ])
+    env.ProcessFlags([env.get("SRC_BUILD_FLAGS", None)])
 
     env.Append(
         CPPDEFINES=["PLATFORMIO={0:02d}{1:02d}{2:02d}".format(
@@ -82,12 +80,18 @@ def BuildProgram(env):
         LIBPATH=["$BUILD_DIR"]
     )
 
+    sources = env.LookupSources(
+        "$BUILDSRC_DIR", "$PROJECTSRC_DIR", duplicate=False,
+        src_filter=env.get("SRC_FILTER"))
+
+    if not sources and not COMMAND_LINE_TARGETS:
+        env.Exit(
+            "Error: Nothing to build. Please put your source code files "
+            "to '%s' folder" % env.subst("$PROJECTSRC_DIR"))
+
     return env.Program(
         join("$BUILD_DIR", env.subst("$PROGNAME")),
-        env.LookupSources(
-            "$BUILDSRC_DIR", "$PROJECTSRC_DIR", duplicate=False,
-            src_filter=getenv("PLATFORMIO_SRC_FILTER",
-                              env.get("SRC_FILTER")))
+        sources
     )
 
 
@@ -177,7 +181,7 @@ def BuildFrameworks(env, frameworks):
     if not frameworks or "uploadlazy" in COMMAND_LINE_TARGETS:
         return
 
-    board_frameworks = env.get("BOARD_OPTIONS", {}).get("frameworks")
+    board_frameworks = env.get("BOARD_OPTIONS", {}).get("frameworks", [])
     if frameworks == ["platformio"]:
         if board_frameworks:
             frameworks.insert(0, board_frameworks[0])

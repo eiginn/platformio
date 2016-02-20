@@ -11,69 +11,279 @@
 
 .. _ide_atom:
 
-Atom
-====
+PlatformIO IDE for Atom
+=======================
 
-`Atom <https://atom.io>`_ is a text editor that's modern, approachable,
-yet hackable to the core—a tool you can customize to do anything but also use
-productively without ever touching a config file.
+PlatformIO IDE is the next generation integrated development environment for IoT:
 
-This software can be used with:
+* Cross-platform code builder without external dependencies to the system
+  software:
 
-* all available :ref:`platforms`
-* all available :ref:`frameworks`
+    - 200+ embedded boards
+    - 15+ development platforms
+    - 10+ frameworks
 
-Refer to the `Atom Documentation <https://atom.io/docs>`_
-page for more detailed information.
+* C/C++ Intelligent code completion
+* C/C++ Smart code linter for super-fast coding
+* Library Manager for the hundreds popular libraries
+* Multi-projects workflow with multiple panes
+* Multiple panes
+* Themes support with dark and light colors
+* Serial Port Monitor
+* Built-in Terminal with :ref:`PlatformIO CLI <userguide>` tool (``pio``, ``platformio``)
+
+
+PlatformIO IDE is based on GitHub's `Atom <https://atom.io>`_ source
+code editor that's modern, approachable, yet hackable to the core; a tool you
+can customize to do anything but also use productively without ever touching a
+config file.
+
 
 .. contents::
 
-Integration
------------
+Installation
+------------
 
-There is Atom based `platomformio <https://atom.io/packages/platomformio>`_
-package which can be installed `Using Atom Packages <https://atom.io/docs/v1.0.2/using-atom-atom-packages>`_.
+PlatformIO IDE is the next generation integrated development environment for IoT.
+It's built on top of `GitHub's Atom "hackable" text editor <https://atom.io>`_.
+If you have already Atom installed, please install `PlatformIO IDE for Atom package <https://atom.io/packages/platformio-ide>`_.
 
-If you have ``clang`` installed in your system (is installed by default in Mac
-OS X), you can enable completions using
-`autocomplete-clang <https://github.com/yasuyuky/autocomplete-clang>`_ package.
-This package requires ``.clang_complete`` file and PlatformIO can generate it.
+Automatic Installation
+~~~~~~~~~~~~~~~~~~~~~~
 
-Choose board ``type`` using :ref:`cmd_boards` or `Embedded Boards Explorer <http://platformio.org/#!/boards>`_
-command and generate project via :option:`platformio init --ide` command:
+Please download PlatformIO IDE for Atom bundle with built-in auto installer
+(be patient and let the installation complete)
 
-.. code-block:: shell
+- `Download PlatformIO IDE for Mac <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-windows.exe/download>`_
+- `Download PlatformIO IDE for Windows <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-mac.zip/download>`_
+- `Download PlatformIO IDE .deb <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-linux-amd64.deb/download>`_
+- `Download PlatformIO IDE .rpm <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-linux-amd64.rpm/download>`_
 
-    platformio init --ide atom --board %TYPE%
+Manual Installation
+~~~~~~~~~~~~~~~~~~~
 
-    # For example, generate project for Arduino UNO
-    platformio init --ide atom --board uno
+1. Download and install the latest Atom text editor
 
-.. warning::
-    The libraries which are added, installed or used in the project
-    after generating process wont be reflected in IDE. To fix it you
-    need to reinitialize project using :ref:`cmd_init` (repeat it).
+    - `Download Atom for Mac <https://atom.io/download/mac>`_
+    - `Download Atom for Windows <https://atom.io/download/windows>`_
+    - `Download Atom .deb <https://atom.io/download/deb>`_
+    - `Download Atom .rpm <https://atom.io/download/rpm>`_
+    - `Other platforms <https://github.com/atom/atom/releases/latest>`_
 
-Articles / Manuals
-------------------
 
-* Jan 16, 2016 - **Dani Eichhorn** - `ESP8266 Arduino IDE Alternative: PlatformIO <http://blog.squix.ch/2016/01/esp8266-arduino-ide-alternative.html>`_
-* Dec 22, 2015 - **Jan Penninkhof** - `Over-the-Air ESP8266 programming using PlatformIO <http://www.penninkhof.com/2015/12/1610-over-the-air-esp8266-programming-using-platformio/>`_
-* Jul 20, 2015 - **Eli Fatsi** - `Arduino Development in Atom Editor <http://viget.com/extend/arduino-development-in-atom-editor>`_
+2. Open Atom Package Manager and search for `platformio-ide <https://atom.io/packages/platformio-ide>`_
 
-See more :ref:`articles`.
+    - **Mac OS X**: ``Menu: Atom > Preferences > Install``
+    - **Windows**: ``Menu: File > Settings > Install``
+    - **Linux**: ``Menu: Edit > Preferences > Install``
 
-Screenshot
+.. image:: ../_static/ide-atom-platformio-install.png
+
+User Guide
 ----------
 
-Building
-^^^^^^^^
+.. image:: ../_static/ide-atom-platformio.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio.png
 
-.. image:: ../_static/ide-platformio-atom-1.gif
-    :target: https://atom.io/packages/platomformio
+Menu item ``PlatformIO``
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Uploading
-^^^^^^^^^
+`platformio-ide <https://atom.io/packages/platformio-ide>`_ package adds to Atom
+new menu item named ``Menu: PlatformIO`` (after ``Menu: Help`` item).
 
-.. image:: ../_static/ide-platformio-atom-2.gif
-    :target: https://atom.io/packages/platomformio
+.. image:: ../_static/ide-atom-platformio-menu-item.png
+
+PlatformIO Toolbar
+~~~~~~~~~~~~~~~~~~
+
+
+PlatformIO IDE Toolbar contains the quick access button to the popular commands.
+Each button contains hint (delay mouse on it).
+
+.. image:: ../_static/ide-atom-platformio-toolbar.png
+
+* PlatformIO: Build
+* PlatformIO: Upload
+* PlatformIO: Clean
+* ||
+* Initialize new PlatformIO Project or update existing...
+* Add/Open Project Folder...
+* Find in Project...
+* ||
+* Terminal
+* Library Manager
+* Serial Ports
+* Serial Monitor
+* ||
+* Settings
+* PlatformIO Documentation
+
+.. _ide_atom_quickstart:
+
+Quickstart
+~~~~~~~~~~
+
+:Step 1:
+
+    Initialize new PlatformIO based project using button on the Toolbar or
+    ``Menu: PlatformIO > Initialize new PlatformIO Project or update existing...``.
+
+:Step 2:
+
+    Put your source code ``*.h, *.c, *.cpp, *.S, *.ino, etc``. files to ``src``
+    directory.
+
+:Step 3:
+
+    Process the project environments. More details :ref:`ide_atom_building_targets`.
+
+
+.. _ide_atom_building_targets:
+
+Building / Uploading / Targets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* ``cmd-alt-b`` / ``ctrl-alt-b`` / ``f9`` builds project without auto-uploading.
+* ``cmd-alt-u`` / ``ctrl-alt-u`` builds and uploads (if no errors).
+* ``cmd-alt-c`` / ``ctrl-alt-c`` cleans compiled objects.
+* ``cmd-alt-t`` / ``ctrl-alt-t`` / ``f7`` run other targets (Upload using Programmer, Upload SPIFFS image, Update platforms and libraries).
+* ``cmd-alt-g`` / ``ctrl-alt-g`` / ``f4`` cycles through causes of build error.
+* ``cmd-alt-h`` / ``ctrl-alt-h`` / ``shift-f4`` goes to the first build error.
+* ``cmd-alt-v`` / ``ctrl-alt-v`` / ``f8`` toggles the build panel.
+* ``escape`` terminates build / closes the build window.
+
+More details `Atom Build package <https://atom.io/packages/build>`_.
+
+Intelligent Code Autocompletion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+PlatformIO IDE uses `clang <http://clang.llvm.org>`_ for the Intelligent Code Autocompletion.
+To check that ``clang`` is available in your system, please open
+Terminal and run ``clang --version``. If ``clang`` is not installed, then install it:
+
+- **Mac OS X**: Install the latest Xcode along with the latest Command Line Tools
+  (they are installed automatically when you run ``clang`` in Terminal for the
+  first time, or manually by running ``xcode-select --install``
+- **Windows**: Download the latest `Clang for Windows <http://llvm.org/releases/download.html>`_.
+  Please select "Add LLVM to the system PATH" option on the installation step.
+- **Linux**: Using package managers: ``apt-get install clang`` or ``yum install clang``.
+- **Other Systems**: Download the latest `Clang for the other systems <http://llvm.org/releases/download.html>`_.
+
+.. warning::
+    The libraries which are added/installed after initializing process will
+    not be reflected in code linter. You need ``Menu: PlatformIO >
+    Rebuild C/C++ Project Index (Autocomplete, Linter)``.
+
+.. _ide_atom_smart_code_linter:
+
+Smart Code Linter
+~~~~~~~~~~~~~~~~~
+
+PlatformIO IDE uses PlatformIO's pre-built GCC toolchains for Smart Code Linter. The
+configuration data are located in ``.gcc-flags.json``. This file will be
+automatically created and preconfigured when you initialize project using
+``Menu: PlatformIO > Initialize new PlatformIO Project or update existing...``.
+
+.. warning::
+    The libraries which are added/installed after initializing process will
+    not be reflected in code linter. You need ``Menu: PlatformIO >
+    Rebuild C/C++ Project Index (Autocomplete, Linter)``.
+
+
+.. error::
+    If you have error like ``linter-gcc: Executable not found`` and
+    ``"***/.platformio/packages/toolchain-atmelavr/bin/avr-g++" not found``
+    please ``Menu: PlatformIO > Initialize new PlatformIO Project or update existing...``.
+
+Install Shell Commands
+~~~~~~~~~~~~~~~~~~~~~~
+
+To install ``platformio`` and ``pio`` shell commands please use ``Menu:
+PlatformIO > Install Shell Commands``. It will allow you to call PlatformIO from
+other process, terminal and etc.
+
+Known issues
+------------
+
+Smart Code Linter is disabled for Arduino files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:ref:`ide_atom_smart_code_linter` is disabled by default for Arduino files
+(``*.ino`` and ``.pde``) because they  are not valid C/C++ based
+source files:
+
+1. Missing includes such as ``#include <Arduino.h>``
+2. Function declarations are omitted.
+
+There are two solutions:
+
+.. contents::
+    :local:
+
+.. _ide_atom_knownissues_sclarduino_manually:
+
+Convert Arduino file to C++ manually
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For example, we have the next ``Demo.ino`` file:
+
+.. code-block:: c++
+
+    void function setup () {
+        someFunction(13);
+    }
+
+    void function loop() {
+        delay(1000);
+    }
+
+    void someFunction(int num) {
+    }
+
+Let's convert it to  ``Demo.cpp``:
+
+1. Add ``#include <Arduino.h>`` at the top of the source file
+2. Declare each custom function (excluding built-in, such as ``setup`` and ``loop``)
+   before it will be called.
+
+The final ``Demo.cpp``:
+
+.. code-block:: c++
+
+    #include <Arduino.h>
+
+    void someFunction(int num);
+
+    void function setup () {
+        someFunction(13);
+    }
+
+    void function loop() {
+        delay(1000);
+    }
+
+    void someFunction(int num) {
+    }
+
+Force Arduino file as C++
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To force Smart Code Linter to use Arduino files as C++ please
+
+1. Open ``.gcc-flags.json`` file from the Initialized/Imported project. Add
+   ``-x c`` option at the beginning to ``gccDefaultCFlags`` and ``gccDefaultCppFlags``
+   fields:
+
+.. code-block:: json
+
+    {
+      "execPath": "...",
+      "gccDefaultCFlags": "-x c -fsyntax-only ...",
+      "gccDefaultCppFlags": "-x c -fsyntax-only ...",
+      "gccErrorLimit": 15,
+      "gccIncludePaths": "...",
+      "gccSuppressWarnings": false
+    }
+
+2. Perform all steps from :ref:`ide_atom_knownissues_sclarduino_manually`
+   (without renaming to ``.cpp``).
