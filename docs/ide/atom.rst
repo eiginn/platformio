@@ -23,11 +23,10 @@ PlatformIO IDE is the next generation integrated development environment for IoT
     - 15+ development platforms
     - 10+ frameworks
 
-* C/C++ Intelligent code completion
-* C/C++ Smart code linter for super-fast coding
+* C/C++ Intelligent Code Completion
+* C/C++ Smart Code Linter for rapid professional development
 * Library Manager for the hundreds popular libraries
 * Multi-projects workflow with multiple panes
-* Multiple panes
 * Themes support with dark and light colors
 * Serial Port Monitor
 * Built-in Terminal with :ref:`PlatformIO CLI <userguide>` tool (``pio``, ``platformio``)
@@ -54,10 +53,10 @@ Automatic Installation
 Please download PlatformIO IDE for Atom bundle with built-in auto installer
 (be patient and let the installation complete)
 
-- `Download PlatformIO IDE for Mac <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-windows.exe/download>`_
-- `Download PlatformIO IDE for Windows <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-mac.zip/download>`_
-- `Download PlatformIO IDE .deb <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-linux-amd64.deb/download>`_
-- `Download PlatformIO IDE .rpm <https://sourceforge.net/projects/platformio-storage/files/ide-bundles/platformio-atom-linux-amd64.rpm/download>`_
+- `Download PlatformIO IDE for Windows <https://dl.bintray.com/platformio/ide-bundles/platformio-atom-windows.exe>`_
+- `Download PlatformIO IDE for Mac <https://dl.bintray.com/platformio/ide-bundles/platformio-atom-mac.zip>`_
+- `Download PlatformIO IDE .deb <https://dl.bintray.com/platformio/ide-bundles/platformio-atom-linux-x86_64.deb>`_
+- `Download PlatformIO IDE .rpm <https://dl.bintray.com/platformio/ide-bundles/platformio-atom-linux-x86_64.rpm>`_
 
 Manual Installation
 ~~~~~~~~~~~~~~~~~~~
@@ -71,7 +70,7 @@ Manual Installation
     - `Other platforms <https://github.com/atom/atom/releases/latest>`_
 
 
-2. Open Atom Package Manager and search for `platformio-ide <https://atom.io/packages/platformio-ide>`_
+2. Open Atom Package Manager and install `platformio-ide <https://atom.io/packages/platformio-ide>`_ Atom package
 
     - **Mac OS X**: ``Menu: Atom > Preferences > Install``
     - **Windows**: ``Menu: File > Settings > Install``
@@ -79,11 +78,140 @@ Manual Installation
 
 .. image:: ../_static/ide-atom-platformio-install.png
 
+
+.. _atom_ide_quickstart:
+
+Quick Start
+-----------
+
+This tutorial introduces you to the basics of PlatformIO IDE workflow and shows you a creation process of a simple "Blink" example. After finishing you will have a general understanding of how to work with projects in the IDE.
+
+Launching
+~~~~~~~~~
+
+PlatformIO IDE is built on top of GitHub's Atom "hackable" text editor.
+After installation please run one of ``Atom.exe``,  ``Atom.app`` or ``atom``
+application depending on the OS.
+
+Setting Up the Project
+~~~~~~~~~~~~~~~~~~~~~~
+
+1. To create a new project choose ``Menu: PlatformIO > Initialize new Project or update existing`` or press the corresponding icon in the PlatformIO toolbar as shown in the image below:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-1.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-1.png
+
+2. In the "New Project Menu" choose desired boards (more than one board is allowed) and select a project directory. Then press "Initialize" button:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-2.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-2.png
+
+3. If everything is fine, you should see the success message and project tree in the left panel:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-3.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-3.png
+
+4. Now, let's create the first project source file: right-click on the folder ``src`` and choose ``New File``:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-4.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-4.png
+
+Enter filename ``main.cpp``:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-5.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-5.png
+
+Copy the next source code to the just created file ``main.cpp``:
+
+.. code-block:: cpp
+
+    /**
+     * Blink
+     * Turns on an LED on for one second,
+     * then off for one second, repeatedly.
+     */
+    #include "Arduino.h"
+
+    void setup()
+    {
+      // initialize LED digital pin as an output.
+      pinMode(LED_BUILTIN, OUTPUT);
+    }
+
+    void loop()
+    {
+      // turn the LED on (HIGH is the voltage level)
+      digitalWrite(LED_BUILTIN, HIGH);
+      // wait for a second
+      delay(1000);
+      // turn the LED off by making the voltage LOW
+      digitalWrite(LED_BUILTIN, LOW);
+       // wait for a second
+      delay(1000);
+    }
+
+Process Project
+~~~~~~~~~~~~~~~
+
+PlatformIO IDE proposes different ways to process project (build, clean, upload firmware, run other targets) using:
+
+    - :ref:`atom_ide_platformio_toolbar`
+    - :ref:`atom_ide_platformio_menu`
+    - :ref:`ide_atom_building_targets` and hotkeys
+
+.. image:: ../_static/ide-atom-platformio-quick-start-6.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-6.png
+
+5. Run ``Build`` and you should see green "success" result in the building
+   panel:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-7.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-7.png
+
+To upload firmware to the board run ``Upload``.
+
+6. What is more, you can run specific target or process project environment
+   using ``Menu: PlatformIO > Run other target...``
+   or call targets list from the status bar (bottom, left corner):
+
+.. image:: ../_static/ide-atom-platformio-quick-start-8.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-8.png
+
+And select desired target:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-9.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-9.png
+
+7. To run built-in terminal interface choose ``Menu: PlatformIO > Terminal`` or press the corresponding icon in the PlatformIO toolbar:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-10.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-10.png
+
+It provides you fast access to all set of powerful PlatformIO CLI commands:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-11.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-11.png
+
+8. To run built-in "Serial Monitor" choose ``Menu: PlatformIO > Serial Monitor`` or press the corresponding icon in the PlatformIO toolbar:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-12.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-12.png
+
+It has several settings to adjust your connection:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-13.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-13.png
+
+And allows you to communicate with your board in an easy way:
+
+.. image:: ../_static/ide-atom-platformio-quick-start-14.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio-quick-start-14.png
+
+
 User Guide
 ----------
 
-.. image:: ../_static/ide-atom-platformio.png
-    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio.png
+.. _atom_ide_platformio_menu:
 
 Menu item ``PlatformIO``
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,9 +221,10 @@ new menu item named ``Menu: PlatformIO`` (after ``Menu: Help`` item).
 
 .. image:: ../_static/ide-atom-platformio-menu-item.png
 
+.. _atom_ide_platformio_toolbar:
+
 PlatformIO Toolbar
 ~~~~~~~~~~~~~~~~~~
-
 
 PlatformIO IDE Toolbar contains the quick access button to the popular commands.
 Each button contains hint (delay mouse on it).
@@ -117,26 +246,6 @@ Each button contains hint (delay mouse on it).
 * ||
 * Settings
 * PlatformIO Documentation
-
-.. _ide_atom_quickstart:
-
-Quickstart
-~~~~~~~~~~
-
-:Step 1:
-
-    Initialize new PlatformIO based project using button on the Toolbar or
-    ``Menu: PlatformIO > Initialize new PlatformIO Project or update existing...``.
-
-:Step 2:
-
-    Put your source code ``*.h, *.c, *.cpp, *.S, *.ino, etc``. files to ``src``
-    directory.
-
-:Step 3:
-
-    Process the project environments. More details :ref:`ide_atom_building_targets`.
-
 
 .. _ide_atom_building_targets:
 
@@ -179,8 +288,9 @@ Terminal and run ``clang --version``. If ``clang`` is not installed, then instal
 Smart Code Linter
 ~~~~~~~~~~~~~~~~~
 
-PlatformIO IDE uses PlatformIO's pre-built GCC toolchains for Smart Code Linter. The
-configuration data are located in ``.gcc-flags.json``. This file will be
+PlatformIO IDE uses PlatformIO's pre-built GCC toolchains for Smart Code Linter
+and rapid professional development.
+The configuration data are located in ``.gcc-flags.json``. This file will be
 automatically created and preconfigured when you initialize project using
 ``Menu: PlatformIO > Initialize new PlatformIO Project or update existing...``.
 
@@ -227,7 +337,7 @@ Convert Arduino file to C++ manually
 
 For example, we have the next ``Demo.ino`` file:
 
-.. code-block:: c++
+.. code-block:: cpp
 
     void function setup () {
         someFunction(13);
@@ -248,7 +358,7 @@ Let's convert it to  ``Demo.cpp``:
 
 The final ``Demo.cpp``:
 
-.. code-block:: c++
+.. code-block:: cpp
 
     #include <Arduino.h>
 
@@ -270,16 +380,15 @@ Force Arduino file as C++
 
 To force Smart Code Linter to use Arduino files as C++ please
 
-1. Open ``.gcc-flags.json`` file from the Initialized/Imported project. Add
-   ``-x c`` option at the beginning to ``gccDefaultCFlags`` and ``gccDefaultCppFlags``
-   fields:
+1. Open ``.gcc-flags.json`` file from the Initialized/Imported project and add
+   ``-x c++`` flag at the beginning of the value of ``gccDefaultCppFlags`` field:
 
 .. code-block:: json
 
     {
       "execPath": "...",
-      "gccDefaultCFlags": "-x c -fsyntax-only ...",
-      "gccDefaultCppFlags": "-x c -fsyntax-only ...",
+      "gccDefaultCFlags": "...",
+      "gccDefaultCppFlags": "-x c++ -fsyntax-only ...",
       "gccErrorLimit": 15,
       "gccIncludePaths": "...",
       "gccSuppressWarnings": false
@@ -287,3 +396,17 @@ To force Smart Code Linter to use Arduino files as C++ please
 
 2. Perform all steps from :ref:`ide_atom_knownissues_sclarduino_manually`
    (without renaming to ``.cpp``).
+
+Articles / Manuals
+------------------
+
+* Feb 28, 2016 - **Alex Bloggt** - `PlatformIO vorgestellt (Introduction to PlatformIO IDE, German) <https://alexbloggt.com/platformio-vorgestellt/>`_
+* Feb 25, 2016 - **NutDIY** - `PlatformIO Blink On Nodemcu Dev Kit V1.0 (Thai) <http://nutdiy.blogspot.com/2016/02/platformio-blink-on-nodemcu-dev-kit-v10.html>`_
+
+See a full list with :ref:`articles`.
+
+Screenshot
+----------
+
+.. image:: ../_static/ide-atom-platformio.png
+    :target: http://docs.platformio.org/en/latest/_images/ide-atom-platformio.png

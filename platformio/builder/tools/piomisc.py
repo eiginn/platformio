@@ -228,6 +228,8 @@ def DumpIDEData(env):
     # https://github.com/platformio/platformio-atom-ide/issues/34
     _new_defines = []
     for item in env_.get("CPPDEFINES", []):
+        if isinstance(item, list):
+            item = "=".join(item)
         item = item.replace('\\"', '"')
         if " " in item:
             _new_defines.append(item.replace(" ", "\\\\ "))
@@ -254,9 +256,10 @@ def GetCompilerType(env):
     if result['returncode'] != 0:
         return None
     output = "".join([result['out'], result['err']]).lower()
-    for type_ in ("clang", "gcc"):
-        if type_ in output:
-            return type_
+    if "clang" in output and "LLVM" in output:
+        return "clang"
+    elif "gcc" in output:
+        return "gcc"
     return None
 
 

@@ -4,6 +4,33 @@ Release Notes
 PlatformIO 2.0
 --------------
 
+2.8.5 (2016-02-??)
+~~~~~~~~~~~~~~~~~~
+
+* Project generator for `NetBeans IDE <http://docs.platformio.org/en/latest/ide/netbeans.html>`__
+  (`issue #541 <https://github.com/platformio/platformio/issues/541>`_)
+* Created package for Homebrew Mac OS X Package Manager: ``brew install
+  platformio``
+  (`issue #395 <https://github.com/platformio/platformio/issues/395>`_)
+* Updated Arduino core for Espressif platform to 2.1.0
+  (`issue #544 <https://github.com/platformio/platformio/issues/544>`_)
+* Added support for the ESP8266 ESP-07 board to
+  `Espressif <http://docs.platformio.org/en/latest/platforms/espressif.html>`__
+  (`issue #527 <https://github.com/platformio/platformio/issues/527>`_)
+* Improved handling of String-based ``CPPDEFINES`` passed to extra ``build_flags``
+  (`issue #526 <https://github.com/platformio/platformio/issues/526>`_)
+* Generate appropriate project for CLion IDE and CVS
+  (`issue #523 <https://github.com/platformio/platformio/issues/523>`_)
+* Fixed issue with incorrect handling of user's build flags where the base flags
+  were passed after user's flags to GCC compiler
+  (`issue #528 <https://github.com/platformio/platformio/issues/528>`_)
+* Fixed issue with Project Generator when optional build flags were passed using
+  system environment variables: `PLATFORMIO_BUILD_FLAGS <http://docs.platformio.org/en/latest/envvars.html#platformio-build-flags>`__
+  or `PLATFORMIO_BUILD_SRC_FLAGS <http://docs.platformio.org/en/latest/envvars.html#platformio-build-src-flags>`__
+* Fixed invalid detecting of compiler type
+  (`issue #550 <https://github.com/platformio/platformio/issues/550>`_)
+
+
 2.8.4 (2016-02-17)
 ~~~~~~~~~~~~~~~~~~
 

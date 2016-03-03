@@ -22,10 +22,7 @@ PlatformIO
 .. image:: https://img.shields.io/pypi/dm/platformio.svg
     :target: https://pypi.python.org/pypi/platformio/
     :alt: PyPi Downloads
-.. image:: https://img.shields.io/sourceforge/dm/platformio-storage.svg
-    :target: https://sourceforge.net/projects/platformio-storage/
-    :alt: Packages Downloads
-.. image:: https://badges.gitter.im/Join%20Chat.svg
+.. image:: https://img.shields.io/chat/on%20gitter.png
    :alt: Join the chat at https://gitter.im/platformio/platformio
    :target: https://gitter.im/platformio/platformio
 .. image:: https://img.shields.io/donate/PlatformIO.png?color=yellow
@@ -40,6 +37,7 @@ PlatformIO
 `Twitter <https://twitter.com/PlatformIO_Org>`_ |
 `Facebook <https://www.facebook.com/platformio>`_ |
 `Hackaday <https://hackaday.io/project/7980-platformio>`_ |
+`Bintray <https://bintray.com/platformio>`_ |
 `Donate <http://platformio.org/#!/donate>`_ |
 `Contact Us <http://platformio.org/#!/contact>`_
 
